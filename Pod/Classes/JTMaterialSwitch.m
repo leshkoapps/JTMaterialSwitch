@@ -624,7 +624,7 @@
   thumbFrame.origin.x = MAX(thumbFrame.origin.x,thumbOffPosition);
   
   //Set the thumb's new frame if need to
-  if(thumbFrame.origin.x != btn.frame.origin.x) {
+  if((fabs(thumbFrame.origin.x)-fabs(btn.frame.origin.x))>FLT_EPSILON) {
     btn.frame = thumbFrame;
   }
 }
