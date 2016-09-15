@@ -173,74 +173,89 @@
 - (id)initWithSize:(JTMaterialSwitchSize)size style:(JTMaterialSwitchStyle)style state:(JTMaterialSwitchState)state
 {
   self = [self initWithSize:size state:state];
-  thumbStyle = style;
-  // Determine switch style from preset colour set
-  // Light and Dark color styles come from Google's design guidelines
-  // https://www.google.com/design/spec/components/selection-controls.html
-  switch (style) {
-    case JTMaterialSwitchStyleLight:
-      self.thumbOnTintColor  = [UIColor colorWithRed:0./255. green:134./255. blue:117./255. alpha:1.0];
-      self.thumbOffTintColor = [UIColor colorWithRed:237./255. green:237./255. blue:237./255. alpha:1.0];
-      self.trackOnTintColor = [UIColor colorWithRed:90./255. green:178./255. blue:169./255. alpha:1.0];
-      self.trackOffTintColor = [UIColor colorWithRed:129./255. green:129./255. blue:129./255. alpha:1.0];
-      self.thumbDisabledTintColor = [UIColor colorWithRed:175./255. green:175./255. blue:175./255. alpha:1.0];
-      self.trackDisabledTintColor = [UIColor colorWithRed:203./255. green:203./255. blue:203./255. alpha:1.0];
-      self.rippleFillColor = [UIColor grayColor];
-      break;
-      
-    case JTMaterialSwitchStyleDark:
-      self.thumbOnTintColor  = [UIColor colorWithRed:109./255. green:194./255. blue:184./255. alpha:1.0];
-      self.thumbOffTintColor = [UIColor colorWithRed:175./255. green:175./255. blue:175./255. alpha:1.0];
-      self.trackOnTintColor = [UIColor colorWithRed:72./255. green:109./255. blue:105./255. alpha:1.0];
-      self.trackOffTintColor = [UIColor colorWithRed:94./255. green:94./255. blue:94./255. alpha:1.0];
-      self.thumbDisabledTintColor = [UIColor colorWithRed:50./255. green:51./255. blue:50./255. alpha:1.0];
-      self.trackDisabledTintColor = [UIColor colorWithRed:56./255. green:56./255. blue:56./255. alpha:1.0];
-      self.rippleFillColor = [UIColor grayColor];
-      break;
-      
-    default:
-      self.thumbOnTintColor  = [UIColor colorWithRed:52./255. green:109./255. blue:241./255. alpha:1.0];
-      self.thumbOffTintColor = [UIColor colorWithRed:249./255. green:249./255. blue:249./255. alpha:1.0];
-      self.trackOnTintColor = [UIColor colorWithRed:143./255. green:179./255. blue:247./255. alpha:1.0];
-      self.trackOffTintColor = [UIColor colorWithRed:193./255. green:193./255. blue:193./255. alpha:1.0];
-      self.thumbDisabledTintColor = [UIColor colorWithRed:174./255. green:174./255. blue:174./255. alpha:1.0];
-      self.trackDisabledTintColor = [UIColor colorWithRed:203./255. green:203./255. blue:203./255. alpha:1.0];
-      self.rippleFillColor = [UIColor blueColor];
-      break;
-  }
+    [self setStyle:style];
   
   return self;
+}
+
+- (JTMaterialSwitchStyle)style{
+    return thumbStyle;
+}
+
+- (void)setStyle:(JTMaterialSwitchStyle)style{
+    thumbStyle = style;
+    // Determine switch style from preset colour set
+    // Light and Dark color styles come from Google's design guidelines
+    // https://www.google.com/design/spec/components/selection-controls.html
+    switch (style) {
+        case JTMaterialSwitchStyleLight:
+            self.thumbOnTintColor  = [UIColor colorWithRed:0./255. green:134./255. blue:117./255. alpha:1.0];
+            self.thumbOffTintColor = [UIColor colorWithRed:237./255. green:237./255. blue:237./255. alpha:1.0];
+            self.trackOnTintColor = [UIColor colorWithRed:90./255. green:178./255. blue:169./255. alpha:1.0];
+            self.trackOffTintColor = [UIColor colorWithRed:129./255. green:129./255. blue:129./255. alpha:1.0];
+            self.thumbDisabledTintColor = [UIColor colorWithRed:175./255. green:175./255. blue:175./255. alpha:1.0];
+            self.trackDisabledTintColor = [UIColor colorWithRed:203./255. green:203./255. blue:203./255. alpha:1.0];
+            self.rippleFillColor = [UIColor grayColor];
+            break;
+            
+        case JTMaterialSwitchStyleDark:
+            self.thumbOnTintColor  = [UIColor colorWithRed:109./255. green:194./255. blue:184./255. alpha:1.0];
+            self.thumbOffTintColor = [UIColor colorWithRed:175./255. green:175./255. blue:175./255. alpha:1.0];
+            self.trackOnTintColor = [UIColor colorWithRed:72./255. green:109./255. blue:105./255. alpha:1.0];
+            self.trackOffTintColor = [UIColor colorWithRed:94./255. green:94./255. blue:94./255. alpha:1.0];
+            self.thumbDisabledTintColor = [UIColor colorWithRed:50./255. green:51./255. blue:50./255. alpha:1.0];
+            self.trackDisabledTintColor = [UIColor colorWithRed:56./255. green:56./255. blue:56./255. alpha:1.0];
+            self.rippleFillColor = [UIColor grayColor];
+            break;
+            
+        default:
+            self.thumbOnTintColor  = [UIColor colorWithRed:52./255. green:109./255. blue:241./255. alpha:1.0];
+            self.thumbOffTintColor = [UIColor colorWithRed:249./255. green:249./255. blue:249./255. alpha:1.0];
+            self.trackOnTintColor = [UIColor colorWithRed:143./255. green:179./255. blue:247./255. alpha:1.0];
+            self.trackOffTintColor = [UIColor colorWithRed:193./255. green:193./255. blue:193./255. alpha:1.0];
+            self.thumbDisabledTintColor = [UIColor colorWithRed:174./255. green:174./255. blue:174./255. alpha:1.0];
+            self.trackDisabledTintColor = [UIColor colorWithRed:203./255. green:203./255. blue:203./255. alpha:1.0];
+            self.rippleFillColor = [UIColor blueColor];
+            break;
+    }
+    
+    if(self.superview!=nil){
+        [self updateStyle];
+    }
+}
+
+- (void)updateStyle{
+    // Set colors for proper positions
+    if(self.isOn == YES) {
+        self.switchThumb.backgroundColor = self.thumbOnTintColor;
+        self.track.backgroundColor = self.trackOnTintColor;
+    }
+    else {
+        self.switchThumb.backgroundColor = self.thumbOffTintColor;
+        self.track.backgroundColor = self.trackOffTintColor;
+        // set initial position
+        [self changeThumbStateOFFwithoutAnimation];
+    }
+    
+    if (self.isEnabled == NO) {
+        self.switchThumb.backgroundColor = self.thumbDisabledTintColor;
+        self.track.backgroundColor = self.trackDisabledTintColor;
+    }
+    
+    // Set bounce value, 3.0 if enabled and none for disabled
+    if (self.isBounceEnabled == YES) {
+        bounceOffset = 3.0f;
+    }
+    else {
+        bounceOffset = 0.0f;
+    }
 }
 
 // When addSubview is called
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
   [super willMoveToSuperview:newSuperview];
-  
-  // Set colors for proper positions
-  if(self.isOn == YES) {
-    self.switchThumb.backgroundColor = self.thumbOnTintColor;
-    self.track.backgroundColor = self.trackOnTintColor;
-  }
-  else {
-    self.switchThumb.backgroundColor = self.thumbOffTintColor;
-    self.track.backgroundColor = self.trackOffTintColor;
-    // set initial position
-    [self changeThumbStateOFFwithoutAnimation];
-  }
-  
-  if (self.isEnabled == NO) {
-    self.switchThumb.backgroundColor = self.thumbDisabledTintColor;
-    self.track.backgroundColor = self.trackDisabledTintColor;
-  }
-  
-  // Set bounce value, 3.0 if enabled and none for disabled
-  if (self.isBounceEnabled == YES) {
-    bounceOffset = 3.0f;
-  }
-  else {
-    bounceOffset = 0.0f;
-  }
+  [self updateStyle];
 }
 
 // Just returns current switch state,

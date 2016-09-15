@@ -91,6 +91,8 @@ typedef enum {
 /** An UIView object that represents the track for the thumb */
 @property (nonatomic, strong) UIView *track;
 
+@property (nonatomic,assign)JTMaterialSwitchStyle style;
+
 #pragma mark - Initializer
 /**
  *  Initializes a JTMaterialSwitch in the easiest way with default parameters.
