@@ -142,4 +142,6 @@ typedef enum {
  */
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
 
+- (void)updateStyle;
+
 @end

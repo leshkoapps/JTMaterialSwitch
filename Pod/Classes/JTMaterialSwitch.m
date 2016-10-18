@@ -219,6 +219,10 @@
             break;
     }
     
+    [self updateStyleIfNeeded];
+}
+
+- (void)updateStyleIfNeeded{
     if(self.superview!=nil){
         [self updateStyle];
     }
